@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import clock from "../../Images/TicketWrapper/clock.svg";
 import flag from "../../Images/TicketWrapper/flag.svg";
 import styles from "./TicketWrapper.module.css";
-import spb from "../../Images/TicketWrapper/spb.png";
 
 interface Props {
   marginTop?: string;
   price900: string;
-  purple: boolean;
+  purple?: boolean;
+  img?: string;
+  yellow?: boolean;
 }
 
-const TicketWrapper = ({ marginTop, price900, purple = false }: Props) => {
+const TicketWrapper = ({
+  marginTop,
+  price900,
+  purple = false,
+  yellow = false,
+  img,
+}: Props) => {
   const [date, setDateSlice] = useState(4);
   const labels = [
     "Билет на целый день",
@@ -18,23 +25,7 @@ const TicketWrapper = ({ marginTop, price900, purple = false }: Props) => {
     "6 остановок у главных достопримечательностей",
     "Ближайший рейс сегодня",
   ];
-  const times = [
-    "09:00",
-    "12:00",
-    "15:00",
-    "18:00",
-    "21:00",
-    "09:00",
-    "12:00",
-    "15:00",
-    "18:00",
-    "21:00",
-    "09:00",
-    "12:00",
-    "15:00",
-    "18:00",
-    "21:00",
-  ];
+  const times = ["09:00", "12:00", "15:00", "18:00", "21:00", "09:00", "12:00"];
   const labelsComponent = labels.map((item) => (
     <div className={styles.flagWrapper}>
       <img src={flag}></img>
@@ -50,26 +41,25 @@ const TicketWrapper = ({ marginTop, price900, purple = false }: Props) => {
     <section className={styles.screenWrapper} style={{ marginTop: marginTop }}>
       <div
         className={styles.photoWrapper}
-        style={{
-          backgroundImage: `url(${spb})`,
-          backgroundRepeat: "no-repeat",
-        }}
+        style={{ backgroundImage: `url(${img})` }}
       >
         {purple ? (
           <p className={styles.newPurple}>НОВИНКА</p>
-        ) : (
+        ) : yellow ? (
           <p className={styles.newYellow}>НОВИНКА</p>
-        )}
+        ) : null}
       </div>
       <div className={styles.formWrapper}>
-        <div className={styles.clockWrapper}>
-          <img src={clock}></img>
-          <label className={styles.time}>2 часа</label>
+        <div className={styles.titleWrapper}>
+          <div className={styles.clockWrapper}>
+            <img src={clock}></img>
+            <label className={styles.time}>2 часа</label>
+          </div>
+          <p className={styles.sale}>
+            АКЦИЯ - Обзорная экскурсия по рекам и <br></br>каналам с остановками
+            Hop on Hop Off 2019
+          </p>
         </div>
-        <p className={styles.sale}>
-          АКЦИЯ - Обзорная экскурсия по рекам и <br></br>каналам с остановками
-          Hop on Hop Off 2019
-        </p>
         <div>{labelsComponent}</div>
         {timesComponent.length > 4 ? (
           <div className={styles.notEnoughTimeWrapper}>
