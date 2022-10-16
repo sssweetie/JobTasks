@@ -1,30 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import clock from "../../Images/TicketWrapper/clock.svg";
 import flag from "../../Images/TicketWrapper/flag.svg";
 import styles from "./TicketWrapper.module.css";
 import spb from "../../Images/TicketWrapper/spb.png";
-const TicketWrapper = () => {
+
+interface Props {
+  marginTop?: string;
+  price900: string;
+  purple: boolean;
+}
+
+const TicketWrapper = ({ marginTop, price900, purple = false }: Props) => {
+  const [date, setDateSlice] = useState(4);
   const labels = [
     "Билет на целый день",
     "Неограниченное число катаний",
     "6 остановок у главных достопримечательностей",
     "Ближайший рейс сегодня",
   ];
-  const times = ["09:00", "12:00", "15:00", "18:00"];
-  const labelsComponent = [];
-  const timesComponent = [];
+  const times = [
+    "09:00",
+    "12:00",
+    "15:00",
+    "18:00",
+    "21:00",
+    "09:00",
+    "12:00",
+    "15:00",
+    "18:00",
+    "21:00",
+    "09:00",
+    "12:00",
+    "15:00",
+    "18:00",
+    "21:00",
+  ];
+  const labelsComponent = labels.map((item) => (
+    <div className={styles.flagWrapper}>
+      <img src={flag}></img>
+      <p>{item}</p>
+    </div>
+  ));
 
-  for (let i = 0; i < labels.length; i++) {
-    labelsComponent.push(
-      <div className={styles.flagWrapper}>
-        <img src={flag}></img>
-        <p>{labels[i]}</p>
-      </div>
-    );
-    timesComponent.push(<div className={styles.raceTime}>{times[i]}</div>);
-  }
+  const timesComponent = times.map((item) => {
+    return <div className={styles.raceTime}>{item}</div>;
+  });
+
   return (
-    <section className={styles.screenWrapper}>
+    <section className={styles.screenWrapper} style={{ marginTop: marginTop }}>
       <div
         className={styles.photoWrapper}
         style={{
@@ -32,7 +55,11 @@ const TicketWrapper = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <p>НОВИНКА</p>
+        {purple ? (
+          <p className={styles.newPurple}>НОВИНКА</p>
+        ) : (
+          <p className={styles.newYellow}>НОВИНКА</p>
+        )}
       </div>
       <div className={styles.formWrapper}>
         <div className={styles.clockWrapper}>
@@ -44,10 +71,26 @@ const TicketWrapper = () => {
           Hop on Hop Off 2019
         </p>
         <div>{labelsComponent}</div>
-        <div className={styles.timesWrapper}>{timesComponent}</div>
+        {timesComponent.length > 4 ? (
+          <div className={styles.notEnoughTimeWrapper}>
+            <div className={styles.timesWrapper}>
+              {timesComponent.slice(0, date)}
+            </div>
+            {date < times.length ? (
+              <p
+                onClick={() => setDateSlice(date + 4)}
+                className={styles.moreTime}
+              >
+                ещё...
+              </p>
+            ) : null}
+          </div>
+        ) : (
+          <div className={styles.timesWrapper}>{timesComponent}</div>
+        )}
         <div className={styles.pricesWrapper}>
           <div>
-            <p className={styles.price900}>900₽</p>
+            <p className={styles.price900}>{price900}</p>
             <label className={styles.price1200}>1200 р на причале</label>
           </div>
           <button className={styles.more}>Подробнее</button>
