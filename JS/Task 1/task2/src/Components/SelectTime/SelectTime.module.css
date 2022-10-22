@@ -1,0 +1,28 @@
+.basicSelect {
+  height: 2rem;
+  width: 95px;
+}
+.advancedSelect {
+  width: 200px;
+  height: 2rem;
+}
+.advancedSelect,
+.basicSelect {
+  text-align: center;
+  font-family: "Rubik";
+  background-color: #539cff;
+  color: #fff;
+  border-radius: 4px;
+  border: 0;
+}
+
+.selectWrapper {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timeStartFinish select:last-child {
+  margin-left: 10px;
+}

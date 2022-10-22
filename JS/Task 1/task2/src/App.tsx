@@ -1,13 +1,8 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import "./App.css";
+import SelectAB from "./Components/SelectAB/SelectAB";
 function App() {
-  return (
-    <div className="App">
-      
-    </div>
-  );
+  return <SelectAB></SelectAB>;
 }
 
 export default App;
