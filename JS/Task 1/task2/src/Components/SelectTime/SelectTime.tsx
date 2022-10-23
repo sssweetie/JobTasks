@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Total from "../ScoreTickets/Total";
 import styles from "./SelectTime.module.css";
+
 interface Travel {
   travel: string;
   isDisabled: Array<string>;
