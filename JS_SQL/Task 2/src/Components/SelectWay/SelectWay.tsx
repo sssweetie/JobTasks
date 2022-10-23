@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SelectTimeContainer from "../SelectTime/SelectTimeContainer";
-import styles from "./SelectAB.module.css";
+import styles from "./SelectWay.module.css";
 const SelectAB = () => {
   const [travel, setTravel] = useState("AB");
 

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import SelectAB from "./Components/SelectAB/SelectAB";
+import SelectAB from "./Components/SelectWay/SelectWay";
 function App() {
   return <SelectAB></SelectAB>;
 }
