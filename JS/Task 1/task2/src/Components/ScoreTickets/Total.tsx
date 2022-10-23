@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Total.module.css";
 const Total = ({ travel, timeStart, timeFinish }: any) => {
-  const [peopleCount, setPeopleCount] = useState(0);
-  const [ticketPrices, setTicketPrices] = useState(0);
-  const [ticketName, setTicketName] = useState("билет");
+  const [peopleCount, setPeopleCount] = useState(0);//how many tickets
+  const [ticketPrices, setTicketPrices] = useState(0);//ticket price
+  const [ticketName, setTicketName] = useState("билет");//state to display current syntax of word "билет"
 
   useEffect(() => {
     setPeopleCount(0);
     setTicketPrices(0);
-  }, [travel]);
+  }, [travel]); //travelDidUpdate ==> reset inputs etc
+
   useEffect(() => {
-    peopleCount === 1
-      ? setTicketName("билет")
-      : peopleCount >= 2 && peopleCount <= 4
-      ? setTicketName("билета")
-      : setTicketName("билетов");
-  }, [peopleCount]);
+    String(peopleCount)
+      .split("")
+      .forEach((item) => {
+        return parseInt(item) === 1
+          ? setTicketName("билет")
+          : parseInt(item) >= 2 && parseInt(item) <= 4
+          ? setTicketName("билета")
+          : setTicketName("билетов");
+      });
+  }, [peopleCount]); //right syntax of words "билет, билета, билетов" that depends on having 1,[2-4],[5-9] in current number
 
   const totalPrice = () => {
     let price = 0;
     travel === "ABA" ? (price = 1200) : (price = 700);
     setTicketPrices(price * peopleCount);
-  };
+  };//from A to B to A price = 1200, else 700. calculate sum.
 
   return (
     <div className={styles.mainWrapper}>
@@ -38,8 +43,8 @@ const Total = ({ travel, timeStart, timeFinish }: any) => {
       </div>
       <div className={styles.output}>
         <p>
-          Вы выбрали {peopleCount ? peopleCount : 0} {ticketName} по маршруту
-          &nbsp;
+          Вы выбрали {peopleCount ? peopleCount : 0} {ticketName} по
+          маршруту&nbsp;
           {travel} стоимостью &nbsp;{ticketPrices}.
         </p>
         {travel === "ABA" ? (

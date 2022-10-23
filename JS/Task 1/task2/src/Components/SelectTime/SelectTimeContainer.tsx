@@ -1,14 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  currentTimeActionCreator,
+  timeFinishActionCreator,
   optionDisabledActionCreator,
+  timeStartActionCreator,
 } from "../../Redux/Reducers/selectReducer";
 import SelectTime from "./SelectTime";
 
 const mstp = (state: any) => ({
   isDisabled: state.selectReducer.isDisabled,
-  currentTime: state.selectReducer.currentTime,
+  timeFinish: state.selectReducer.timeFinish,
+  timeStart: state.selectReducer.timeStart,
 });
 
 const mdtp = (dispatch: any) => {
@@ -16,8 +18,11 @@ const mdtp = (dispatch: any) => {
     disableOption: (disable: Array<string>) => {
       dispatch(optionDisabledActionCreator(disable));
     },
-    setCurrentTime: (currentTime: string) => {
-      dispatch(currentTimeActionCreator(currentTime));
+    setTimeFinish: (timeFinish: string) => {
+      dispatch(timeFinishActionCreator(timeFinish));
+    },
+    setTimeStart: (timeStart: string) => {
+      dispatch(timeStartActionCreator(timeStart));
     },
   };
 };
@@ -28,8 +33,10 @@ const SelectTimeContainer = (props: any) => {
       travel={props.travel}
       isDisabled={props.isDisabled}
       disableOption={props.disableOption}
-      currentTime={props.currentTime}
-      setCurrentTime={props.setCurrentTime}
+      timeFinish={props.timeFinish}
+      setTimeFinish={props.setTimeFinish}
+      timeStart={props.timeStart}
+      setTimeStart={props.setTimeStart}
     ></SelectTime>
   );
 };

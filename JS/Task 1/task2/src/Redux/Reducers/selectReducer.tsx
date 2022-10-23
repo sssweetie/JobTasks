@@ -1,7 +1,8 @@
 import React from "react";
 
 const OPTION_DISABLED = "selectReducer/OPTION-DISABLED";
-const CHANGE_CURRENT_TIME = "selectReducer/CHANGE-CURRENT-TYPE";
+const CHANGE_FINISH_TIME = "selectReducer/CHANGE-FINISH-TIME";
+const CHANGE_START_TIME = "selectReducer/CHANGE-START-TIME";
 let initialState = {
   isDisabled: [
     "inherit",
@@ -12,7 +13,8 @@ let initialState = {
     "inherit",
     "inherit",
   ],
-  currentTime: "18:00",
+  timeFinish: "",
+  timeStart: "",
 };
 
 const selectReducer = (state = initialState, action: any) => {
@@ -20,8 +22,11 @@ const selectReducer = (state = initialState, action: any) => {
     case OPTION_DISABLED: {
       return { ...state, isDisabled: action.disabled };
     }
-    case CHANGE_CURRENT_TIME: {
-      return { ...state, currentTime: action.currentTime };
+    case CHANGE_FINISH_TIME: {
+      return { ...state, timeFinish: action.timeFinish };
+    }
+    case CHANGE_START_TIME: {
+      return { ...state, timeStart: action.timeStart };
     }
     default:
       return state;
@@ -33,9 +38,14 @@ export const optionDisabledActionCreator = (disabled: Array<string>) => ({
   disabled,
 });
 
-export const currentTimeActionCreator = (currentTime: string) => ({
-  type: CHANGE_CURRENT_TIME,
-  currentTime,
+export const timeFinishActionCreator = (timeFinish: string) => ({
+  type: CHANGE_FINISH_TIME,
+  timeFinish,
+});
+
+export const timeStartActionCreator = (timeStart: string) => ({
+  type: CHANGE_START_TIME,
+  timeStart,
 });
 
 export default selectReducer;
